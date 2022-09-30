@@ -17,6 +17,11 @@ struct String {
         strcpy(str, stri);
     }
 
+    String(const String &other) : size{other.size}, str{new char [size + 1]} {
+        strcpy(str, other.str);
+        str[size] = '\0';
+    }
+
     ~String() { delete[] str; }
 
     int Length() { return size; }
@@ -87,28 +92,18 @@ struct String {
         return temp;
     }
 
-    void Insert(char *s, int index) {
-        char * temp;
-        if (index <= size) { 
-            temp = new char[size - index + 1]; 
-            strcpy(temp, str + index);
-        } else { 
+    void Insert(const char *other, int index) {
+        if (index >= size) {
             index = size;
-            temp = new char[1];
-            temp[0] = '\0';
         }
-        int count = 0;
-        while (*(s + count) != '\0') ++count;
-        int new_size = size + count;
-        char *buff = new char[new_size + 1];
-        for (int i {}; i < index; ++i) buff[i] = str[i];
-        for (int i {index}, j {}; i < index + count; ++i, ++j) buff[i] = s[j];
-        for (int i {index + count}, j {}; i < new_size; ++i, ++j) buff[i] = temp[j];
-        buff[new_size] = '\0';
-        delete[] temp;
-        delete[] str;
-        str = buff;
-        size = new_size;
+        char * new_data = new char [size + strlen(other) + 1];
+        memcpy(new_data, str, sizeof(char) * index);
+        memcpy(new_data + index, other, strlen(other));
+        memcpy(new_data + index + strlen(other), str + index, strlen(str + index));
+        size = size + strlen(other);
+        new_data[size] = '\0';
+        delete [] str;
+        str = new_data;
     }
 
    private:

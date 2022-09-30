@@ -12,8 +12,8 @@ int main() {
     std::cout << "Remove(2, 2) = ";
     a.Remove(2, 2);
     a.print();
-    std::cout << "Insert(\"Hello!\", 2) = ";
-    a.Insert(text, 2);
+    std::cout << "Insert(\"Hello!\", 4) = ";
+    a.Insert(text, 4);
     a.print();
     std::cout << "Trim = ";
     a.trim();
@@ -22,14 +22,17 @@ int main() {
     a.Copy(text);
     a.print();
 
+    String c(a);
+    c.print();
+
     std::puts("");
     std::cout << "---------------------------------------------------------------------------------------\n";
     std::puts("");
 
-    Complex f(1, 2);
-    Complex d(3, 4);
-    Complex hehe(0, 0);
-    Complex temp;
+    Complex<double> f(1, 2);
+    Complex<double> d(3, 4);
+    Complex<double> hehe(0, 0);
+    Complex<double> temp;
     std::cout << "f = ";
     f.print();
     std::cout << "d = ";

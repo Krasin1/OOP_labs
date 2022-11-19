@@ -24,7 +24,7 @@ struct CThree : public CTwo {
 
     virtual ~CThree() {}      //деструктор
 
-    int get_int() { return var; }
+    virtual int get_int() { return var; }
 
     virtual void print() { 
         std::cout << "  CThree:\nint = " << var << '\n'; 

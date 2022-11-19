@@ -24,7 +24,7 @@ struct CFour : public CThree{
 
     virtual ~CFour() {}
 
-    int get_int() { return h; }
+    virtual int get_int() { return h; }
 
     virtual void print() {
         std::cout << "  CFour\nint = " << h << '\n'; 

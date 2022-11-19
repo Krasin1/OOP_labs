@@ -6,7 +6,7 @@
 struct COne {
     COne() {
         f = 0;
-        ps = NULL;
+        ps = nullptr;
     }
     COne(float a, char *b) : f(a) {
         int size = 0;
@@ -42,7 +42,11 @@ struct COne {
     }
 
     void print() {
-        std::cout << "float = " << f << "\nchar * = " << (void *)ps << '\n';
+        std::cout << "  Cone:\n";
+        if (ps) 
+            std::cout << "float = " << f << "\nchar * = " << ps << "\n\n";
+        else 
+            std::cout << "float = " << f << "\nchar * = " << (void *)ps << "\n\n";
     }
 
     float get_f() { return f; }

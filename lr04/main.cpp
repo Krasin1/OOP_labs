@@ -7,9 +7,11 @@ void printAll(CTwo** a, int n) {
 }
 
 int main() {
-    CTwo a{};
-    CThree b{};
-    CFour c{};
+    char str[] = "Hello";
+    COne temp {3.14, str};
+    CTwo a{6.28, &temp};
+    CThree b{a, 8};
+    CFour c{b, 10};
     CTwo* array[3]{&a, &b, &c};
     printAll(array, 3);
     return 0;

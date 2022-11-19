@@ -1,3 +1,6 @@
+#ifndef CFOUR_HPP
+#define CFOUR_HPP
+
 #include "CThree.hpp"
 
 struct CFour : public CThree{
@@ -5,7 +8,9 @@ struct CFour : public CThree{
 
     explicit CFour(int a) : h(a) {}
 
-    explicit CFour(const CFour &a) { h = a.h; }
+    explicit CFour(const CFour &a) : CThree(a), h(a.h) {}
+
+    explicit CFour(const CThree &a, int b) : CThree(a) , h(b) {}
 
     CFour &operator=(const CFour &a) {
         h = a.h;
@@ -17,12 +22,18 @@ struct CFour : public CThree{
         return *this;
     }
 
-    ~CFour() {}
+    virtual ~CFour() {}
 
     int get_int() { return h; }
 
-    void print() { std::cout << "int = " << h << '\n'; }
+    virtual void print() {
+        std::cout << "  CFour\nint = " << h << '\n'; 
+        CThree::print();
+        std::cout << '\n';
+    }
 
    private:
     int h;
 };
+
+#endif

@@ -19,12 +19,11 @@ struct CTwo {
     CTwo(const CTwo &a) {
         d = a.d;
         COne *temp = new COne;
-        delete p;
         *temp = *a.p;
         p = temp;
     }
 
-    ~CTwo() { delete p; }
+    virtual ~CTwo() { delete p; }
 
     CTwo &operator=(const CTwo &a) {
         d = a.d;
@@ -40,11 +39,14 @@ struct CTwo {
     COne *get_COne() { return p; }
 
     virtual void print() {
-        std::cout << "double = " << d << "\nCOne * = " << (void *)p << '\n';
+        std::cout << "  CTwo\ndouble = " << d << "\n";
+        p->print();
+        std::cout << '\n';
     }
 
    private:
     double d;
     COne *p;
 };
+
 #endif

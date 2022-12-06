@@ -3,14 +3,14 @@
 
 #include "CThree.hpp"
 
-struct CFour : public CThree{
+struct CFour : public CThree {
     explicit CFour() : h(0) {}
 
     explicit CFour(int a) : h(a) {}
 
     explicit CFour(const CFour &a) : CThree(a), h(a.h) {}
 
-    explicit CFour(const CThree &a, int b) : CThree(a) , h(b) {}
+    explicit CFour(const CThree &a, int b) : CThree(a), h(b) {}
 
     CFour &operator=(const CFour &a) {
         h = a.h;
@@ -27,7 +27,7 @@ struct CFour : public CThree{
     virtual int get_int() { return h; }
 
     virtual void print() {
-        std::cout << "  CFour\nint = " << h << '\n'; 
+        std::cout << "  CFour\nint = " << h << '\n';
         CThree::print();
         std::cout << '\n';
     }

@@ -15,10 +15,7 @@ struct Complex {
         return temp;
     }
     Complex operator/(const Complex &a) {
-        if (a.re == 0 && a.im == 0) {
-            std::cout << "На ноль делишь?\n";
-            return *this;
-        }
+        if (a.re == 0 && a.im == 0) { throw std::exception(); }
         Complex temp((re * a.re + im * a.im) / (a.re * a.re + a.im * a.im),
                      (im * a.re - re * a.im) / (a.re * a.re + a.im * a.im));
 

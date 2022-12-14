@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include <iostream>
 #include "ui_mainwindow.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,15 +17,17 @@ MainWindow::~MainWindow()
 
 QString parser(const QString & str){
     std::string temp = str.toStdString();
-    char * stri = new char[temp.size() + 1];
+    char * stri = new char[temp.size() + 1];  //почему не работает str.size() ???
     strcpy(stri, temp.c_str());
 
 
-    int count = 0;
-    for(int i = 0; i < temp.size() && stri[i] != '+' && stri[i] != '-' && stri[i] != '*' && stri[i] != '/'; ++i) {
-        count++;
+    qDebug() << str.size() << temp.size() << strlen(stri) << stri << '\n'; //магия б***ь
+
+    unsigned count = 0;
+    for(int i = 0; i < str.size() && stri[i] != '+' && stri[i] != '-' && stri[i] != '*' && stri[i] != '/'; ++i) {
+        ++count;
     }
-    if (count == temp.size()){
+    if (count >= str.size()){
         delete [] stri;
         return "Знак операции не считан";
     }
@@ -34,8 +37,9 @@ QString parser(const QString & str){
     QString operation = str.mid(count, 1);
 
 
+
     count = 0;
-    for(int i = temp.size(); i > 0 && stri[i] != '+' && stri[i] != '-' && stri[i] != '*' && stri[i] != '/'; --i) {
+    for(int i = str.size(); i > 0 && stri[i] != '+' && stri[i] != '-' && stri[i] != '*' && stri[i] != '/'; --i) {
         count++;
     }
     QString right = str.right(count - 1);

@@ -6,8 +6,8 @@ int main() {
     String a;
     a.read();
     std::cout << "Length = " << a.Length() << '\n';
-    std::cout << "Substr(3, 3) = ";
-    String b = a.Substr(3, 3);
+    std::cout << "Substr(3, 6) = ";
+    String b = a.Substr(3, 6);
     b.print();
     std::cout << "Remove(2, 2) = ";
     a.Remove(2, 2);

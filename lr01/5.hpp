@@ -17,30 +17,34 @@ struct String {
         strcpy(str, stri);
     }
 
-    String(const String &other) : size{other.size}, str{new char [size + 1]} {
+    String(const String &other) : size{other.size}, str{new char[size + 1]} {
         strcpy(str, other.str);
         str[size] = '\0';
     }
 
     ~String() { delete[] str; }
 
-    int Length() { return size; }
+    size_t Length() { return size; }
 
     void Copy(const String &stri) {
-        delete[] str;
-        str = new char[stri.size + 1];
-        strcpy(str, stri.str);
-        size = stri.size;
+        if (str != stri.str) {
+            delete[] str;
+            str = new char[stri.size + 1];
+            strcpy(str, stri.str);
+            size = stri.size;
+        }
     }
 
     void Copy(const char *stri) {
-        delete[] str;
-        size = strlen(stri);
-        str = new char[size + 1];
-        strcpy(str, stri);
+        if (str != stri) {
+            delete[] str;
+            size = strlen(stri);
+            str = new char[size + 1];
+            strcpy(str, stri);
+        }
     }
 
-    void print() { std::cout << str << '\n'; }
+    void prsize_t() { std::cout << str << '\n'; }
 
     void read() {
         std::string stri;
@@ -51,13 +55,13 @@ struct String {
         strcpy(str, stri.c_str());
     }
 
-    void Remove(int index, int count) {
+    void Remove(size_t index, size_t count) {
         if (index < size) {
             char *new_buff = new char[size - count + 1];
-            for (int i{0}; i < index; ++i) {
+            for (size_t i{0}; i < index; ++i) {
                 new_buff[i] = str[i];
             }
-            for (int i{index}, j{index + count}; j < size; ++i, ++j) {
+            for (size_t i{index}, j{index + count}; j < size; ++i, ++j) {
                 new_buff[i] = str[j];
             }
             delete[] str;
@@ -68,11 +72,11 @@ struct String {
     }
 
     void trim() {
-        int count1 = 0, count2 = 0;
+        size_t count1 = 0, count2 = 0;
         while (*(str + count1) == ' ') count1++;
         while (*(str + size - count2) == ' ') count2++;
         char *new_buff = new char[size - count1 - count2 + 1];
-        for (int i{count1}, j{0}; i < size - count2; ++i, ++j)
+        for (size_t i{count1}, j{0}; i < size - count2; ++i, ++j)
             new_buff[j] = str[i];
         delete[] str;
         str = new_buff;
@@ -80,34 +84,37 @@ struct String {
         size = size - count1 - count2;
     }
 
-    String Substr(int index, int count) {
-        int new_size = 0;
+    String Substr(size_t index, size_t count) {
+        size_t new_size = 0;
         if (index < size)
             new_size = (index + count) < size ? count : (size - index);
         char *stri = new char[new_size + 1];
-        for (int i{}; i < new_size; ++i) stri[i] = str[index + i];
+        for (size_t i{}; i < new_size; ++i) stri[i] = str[index + i];
         stri[new_size] = '\0';
         String temp(stri);
         delete[] stri;
         return temp;
     }
 
-    void Insert(const char *other, int index) {
+    void Insert(const char *other, size_t index) {
         if (index >= size) {
             index = size;
         }
-        char * new_data = new char [size + strlen(other) + 1];
+        char *new_data = new char[size + strlen(other) + 1];
         memcpy(new_data, str, sizeof(char) * index);
         memcpy(new_data + index, other, strlen(other));
-        memcpy(new_data + index + strlen(other), str + index, strlen(str + index));
+        memcpy(new_data + index + strlen(other), str + index,
+               strlen(str + index));
         size = size + strlen(other);
         new_data[size] = '\0';
-        delete [] str;
+        delete[] str;
         str = new_data;
     }
 
+    void print() { std::cout << str << '\n'; }
+
    private:
-    int size;
+    size_t size;
     char *str;
 };
 

@@ -8,7 +8,7 @@ void printAll(CTwo** a, int n) {
 
 int main() {
     char str[] = "Hello";
-    COne temp {3.14, str};
+    COne temp {(float)3.14, str};
     CTwo a{6.28, &temp};
     CThree b{a, 8};
     CFour c{b, 10};

@@ -6,7 +6,7 @@
 
 template <std::floating_point T>
 struct Complex {
-    Complex() : re(0), im() {}
+    Complex() : re(0), im(0) {}
     Complex(T a, T b) : re(a), im(b) {}
     ~Complex() {}
 
